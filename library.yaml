@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library
+  labels:
+    app: library-svc
+spec:
+  minReadySeconds: 5
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+        env: dev
+    spec:
+      containers:
+        - name: web
+          image: shaikkhajaibrahim/libwebstore:1.0
+          env:
+            - name: REACT_APP_BACKEND_API_URL
+              value: http://users-svc:8000/api/v1  # Corrected URL
+            - name: REACT_APP_BOOKS_API_URL
+              value: http://books-svc:8000/api/v1/books  # Corrected URL
+            - name: REACT_APP_USERS_API_URL
+              value: http://users-svc:8000/api/v1/users  # Corrected URL
+          ports:
+            - containerPort: 3000
+          
+          resources:
+            requests:
+              cpu: 250m
+              memory: 250Mi
+            limits:
+              cpu: 300m
+              memory: 350Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-svc
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app:  web

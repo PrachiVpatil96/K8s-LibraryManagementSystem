@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-db-deployment
+  labels:
+    app: users-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      db: users
+  template:
+    metadata:
+      labels:
+        db: users
+    spec:
+      containers:
+        - name: usersdb
+          image: postgres:15-alpine
+          env:
+            - name: POSTGRES_USER
+              value: user
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_DB
+              value: usersdb
+          resources:
+            requests:
+              memory: "24Mi"  # Corrected format for memory
+              cpu: "100m"
+            limits:
+              memory: "128Mi"  # Corrected format for memory
+              cpu: "500m"
+          ports:
+            - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-db
+spec:
+  type: ClusterIP
+  selector:
+    db: users
+  ports:
+    - port: 5432
+      targetPort: 5432

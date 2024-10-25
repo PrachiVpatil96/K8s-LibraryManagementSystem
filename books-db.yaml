@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: books-db
+  labels:
+    app: web-deploy
+spec:
+  minReadySeconds:  2
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  web-app
+  template:
+    metadata:
+      labels:
+        app:  web-app
+        env:  dev
+    spec:
+      containers:
+        - name: books-db
+          image:  postgres:15-alpine
+          env:
+            - name: POSTGRES_USER
+              value:  user
+            - name: POSTGRES_PASSWORD
+              value: password 
+            - name: POSTGRES_DB
+              value:  booksdb
+          ports:
+            - containerPort:  5432
+          resources:
+            requests:
+              cpu: 250m
+              memory: 250Mi
+            limits:
+              cpu: 300m
+              memory: 350Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: books-db
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app:  web-app
+
+
+
+
+
