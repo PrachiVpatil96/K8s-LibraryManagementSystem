@@ -21,11 +21,11 @@ spec:
           image: shaikkhajaibrahim/libwebstore:1.0
           env:
             - name: REACT_APP_BACKEND_API_URL
-              value: http://users-svc:8000/api/v1  # Corrected URL
+              value: http://users-service:8000/api/v1  # Corrected URL
             - name: REACT_APP_BOOKS_API_URL
               value: http://books-svc:8000/api/v1/books  # Corrected URL
             - name: REACT_APP_USERS_API_URL
-              value: http://users-svc:8000/api/v1/users  # Corrected URL
+              value: http://users-service:8000/api/v1/users  # Corrected URL
           ports:
             - containerPort: 3000
           
