@@ -29,3 +29,15 @@ data:
   POSTGRES_PASSWORD: password
   POSTGRES_DB: usersdb
 
+#Config map for usersvc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: usersvc-configmap
+data:
+  DATABASE_URL: "postgresql://user:password@users-db:5432/usersdb"
+  SECRET_KEY: "YtDEVWnL35aAIP-5yxeLjAZ49R920-mMNDfwPyWULu63HFsYzo0f-LO2InxC8eu428k"
+
+
+
