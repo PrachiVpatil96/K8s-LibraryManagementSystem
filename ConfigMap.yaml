@@ -7,3 +7,14 @@ data:
   POSTGRES_USER: user
   POSTGRES_PASSWORD: password
   POSTGRES_DB: booksdb
+
+#configmap for booksdb-service
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookssvc-configmap
+data:
+  DATABASE_URL: "postgresql://user:password@books-db:5432/booksdb"
+  SECRET_KEY: "YtDEVWnL35aAIP-5yxeLjAZ49R920-mMNDfwPyWULu63HFsYzo0f-LO2InxC8eu428k"
+  
