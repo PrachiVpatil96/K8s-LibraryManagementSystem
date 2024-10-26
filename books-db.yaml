@@ -22,7 +22,7 @@ spec:
           image: postgres:15-alpine
           envFrom:
             - configMapRef:
-              name: booksdb-configmag
+                name: booksdb-configmag
           ports:
             - containerPort: 5432
           resources:
