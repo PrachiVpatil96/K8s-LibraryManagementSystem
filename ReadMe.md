@@ -136,3 +136,5 @@ How application get access thrugh service
 **Access it using loadbalancer-service** 
 
 http://:svcport/docs
+
+![Communication](Images/Img7.PNG)
