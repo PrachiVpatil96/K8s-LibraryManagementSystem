@@ -17,4 +17,15 @@ metadata:
 data:
   DATABASE_URL: "postgresql://user:password@books-db:5432/booksdb"
   SECRET_KEY: "YtDEVWnL35aAIP-5yxeLjAZ49R920-mMNDfwPyWULu63HFsYzo0f-LO2InxC8eu428k"
-  
+
+#Configmap for userdb
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: userdb-configmap
+data:
+  POSTGRES_USER: user
+  POSTGRES_PASSWORD: password
+  POSTGRES_DB: usersdb
+
