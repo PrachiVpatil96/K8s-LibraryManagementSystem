@@ -1,6 +1,7 @@
 ## Library Management System
 
 ### Prerequisites
+
 1. Make Sure you have docker,k8s,python Installed in your local system or virtual machine and all the configuration has been made up of.
 
 ![Sample Overwiew](Images/Img2.PNG)
@@ -30,9 +31,9 @@
 
 - image: postgres:15-alpine
 - environmental variables:
-    - POSTGRES_USER: user
-    - POSTGRES_PASSWORD: password
-    - POSTGRES_DB: booksdb
+  - POSTGRES_USER: user
+  - POSTGRES_PASSWORD: password
+  - POSTGRES_DB: booksdb
 - port: 5432
 
 #### To run book Service
@@ -70,17 +71,16 @@
 - port: 3000
 
 ## Yaml file
+
 - Now write a Yaml file for
-    - BooksDB 
-    - BooksDetails
-    - UserDB
-    - UserDetails
-    - Libraryappplication
 
+  - BooksDB
+  - BooksDetails
+  - UserDB
+  - UserDetails
+  - Libraryappplication
 
-
-   [ReferHere](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#envfromsource-v1-core)
-
+  [ReferHere](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#envfromsource-v1-core)
 
 Save the changes and run the following command to create an deployment set for an above application
 
@@ -88,7 +88,9 @@ Save the changes and run the following command to create an deployment set for a
 # This is a comment in bash
  kubectl apply -f .
 ```
+
 If You want to run any particular yaml file then
+
 ```bash
 # This is a comment in bash
  kubectl apply -f books-db.yaml
@@ -98,3 +100,39 @@ If You want to run any particular yaml file then
  kubectl apply -f library.yaml
  kubectl apply -f ConfigMap.yaml
 ```
+
+- command to get pod details
+
+```bash
+# This is a comment in bash
+kubectl get pods
+```
+
+![](Images/Img3.PNG)
+
+- command to get all resources details
+
+```bash
+# This is a comment in bash
+kubectl get all
+```
+
+![](Images/Img5.PNG)
+
+- command to get service
+
+```bash
+# This is a comment in bash
+kubectl get svc
+```
+
+![](Images/Img4.PNG)
+
+
+How application get access thrugh service
+![Communication](Images/Img6.PNG)
+![for service](https://kubernetes.io/docs/concepts/services-networking/service/)
+
+**Access it using loadbalancer-service** 
+
+http://:svcport/docs
