@@ -68,3 +68,33 @@
   - REACT_APP_BOOKS_API_URL: http://:8000/api/v1/books
   - REACT_APP_USERS_API_URL: http://:8000/api/v1/users
 - port: 3000
+
+## Yaml file
+- Now write a Yaml file for
+    - BooksDB 
+    - BooksDetails
+    - UserDB
+    - UserDetails
+    - Libraryappplication
+
+
+
+   [ReferHere](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#envfromsource-v1-core)
+
+
+Save the changes and run the following command to create an deployment set for an above application
+
+```bash
+# This is a comment in bash
+ kubectl apply -f .
+```
+If You want to run any particular yaml file then
+```bash
+# This is a comment in bash
+ kubectl apply -f books-db.yaml
+ kubectl apply -f books-svc.yaml
+ kubectl apply -f usersdb.yaml
+ kubectl apply -f users-svc.yaml
+ kubectl apply -f library.yaml
+ kubectl apply -f ConfigMap.yaml
+```
