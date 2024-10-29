@@ -2,30 +2,30 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: book-sts-svc
+  name: user-sts-svc
   labels:
-    app:  books-sts-svc
-spec:
+    app:  users-sts-svc
+spec: 
   minReadySeconds: 5
   ordinals:
     start: 1
   replicas: 1
   selector:
     matchLabels:
-      app: books
-  serviceName: bookdb-service
+      app: users
+  serviceName: usersdb-service
   template:
     metadata:
       labels:
-        app: books
+        app: users
         env: dev
     spec: 
       containers:
         - name: web
-          image: shaikkhajaibrahim/libbookssvc:1.0
+          image: shaikkhajaibrahim/libuserssvc:1.0
           envFrom:
             - secretRef:
-                name: booksdb-svc-secrets
+                name: usersdb-svc-secrets
             
           ports:
             - containerPort: 8000
@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: booksdb-service
+  name: usersdb-service
 spec:
   type: ClusterIP
   clusterIP: None
@@ -48,4 +48,4 @@ spec:
     - port: 8000
       targetPort: 8000
   selector:
-    app: books
+    app: users
