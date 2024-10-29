@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: book-sts-svc
+  labels:
+    app:  books-sts-svc
+spec:
+  minReadySeconds: 5
+  ordinals:
+    start: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: books
+  serviceName: bookdb-service
+  template:
+    metadata:
+      labels:
+        app: books
+        env: dev
+    spec: 
+      containers:
+        - name: web
+          image: shaikkhajaibrahim/libbookssvc:1.0
+          envFrom:
+            - secretRef:
+                name: booksdb-svc-secrets
+            
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 200m
+              memory: 200Mi
+            limits:
+              cpu: 250m
+              memory: 250Mi  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: booksdb-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: books
