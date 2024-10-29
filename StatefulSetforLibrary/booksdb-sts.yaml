@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: booksdb-sts
+  name: booksdb
   labels:
       name: bookdb
 spec:
@@ -31,7 +31,7 @@ spec:
               memory: 350Mi 
           envFrom:
             - secretRef:
-                name: booksdb-sts
+                name: booksdb-secrets
           ports:
             - containerPort: 5432
 
