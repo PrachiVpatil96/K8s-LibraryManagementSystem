@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: usersdb-sts
+  labels:
+      name: usersdb
+spec:
+  minReadySeconds: 10
+  ordinals:
+    start: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usersdb-sts 
+  serviceName: usersdbsts-svc
+  template:
+    metadata:
+      labels:
+        app: usersdb-sts 
+    spec:
+      containers:
+        - name: usersts
+          image: postgres:15-alpine
+          resources:
+            requests:
+              cpu: 250m
+              memory: 250Mi
+            limits:
+              cpu: 300m
+              memory: 350Mi 
+          envFrom:
+            - secretRef:
+                name: usersdb-sts
+          ports:
+            - containerPort: 5432
+
+          volumeMounts:
+            - name: usersdb-vol
+              mountPath: /var/lib/postgresql/data
+              subPath: data
+              
+  volumeClaimTemplates:
+    - metadata:
+        name: usersdb-vol 
+      spec:
+        accessModes: 
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: usersdbsts-svc
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: usersdb-sts 
+  ports:  
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+
