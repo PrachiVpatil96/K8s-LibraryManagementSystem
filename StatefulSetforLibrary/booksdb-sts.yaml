@@ -4,7 +4,7 @@ kind: StatefulSet
 metadata:
   name: booksdb
   labels:
-      name: bookdb
+      app: booksdb
 spec:
   minReadySeconds: 10
   ordinals:
@@ -12,12 +12,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: booksdb-sts 
+      app: booksdb
   serviceName: booksdbsts-svc
   template:
     metadata:
       labels:
-        app: booksdb-sts 
+        app: booksdb 
     spec:
       containers:
         - name: booksts
@@ -59,7 +59,7 @@ spec:
   type: ClusterIP
   clusterIP: None
   selector:
-    app: booksdb-sts 
+    app: booksdb 
   ports:  
     - port: 5432
       targetPort: 5432

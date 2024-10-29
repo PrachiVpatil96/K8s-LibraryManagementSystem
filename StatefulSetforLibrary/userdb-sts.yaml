@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: usersdb-sts
+  name: usersdb
   labels:
       name: usersdb
 spec:
@@ -12,12 +12,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: usersdb-sts 
+      app: usersdb
   serviceName: usersdbsts-svc
   template:
     metadata:
       labels:
-        app: usersdb-sts 
+        app: usersdb 
     spec:
       containers:
         - name: usersts
@@ -31,7 +31,7 @@ spec:
               memory: 350Mi 
           envFrom:
             - secretRef:
-                name: usersdb-sts
+                name: usersdb-secrets
           ports:
             - containerPort: 5432
 
@@ -59,7 +59,7 @@ spec:
   type: ClusterIP
   clusterIP: None
   selector:
-    app: usersdb-sts 
+    app: usersdb
   ports:  
     - port: 5432
       targetPort: 5432

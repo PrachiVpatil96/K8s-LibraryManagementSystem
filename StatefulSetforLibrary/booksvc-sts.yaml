@@ -4,7 +4,7 @@ kind: StatefulSet
 metadata:
   name: bookssvc
   labels:
-    app:  books-sts-svc
+    app: books-svc
 spec:
   minReadySeconds: 5
   ordinals:
