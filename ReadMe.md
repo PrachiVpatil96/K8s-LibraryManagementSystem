@@ -3,7 +3,6 @@
 ## SelfHosted Agent (k8s Installation)
 
 
-Here's the requested text formatted in markdown:
 
 ---
 
