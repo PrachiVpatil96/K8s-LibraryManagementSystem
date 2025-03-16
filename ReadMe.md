@@ -55,7 +55,7 @@ This document outlines the high-level steps to set up a Kubernetes cluster using
    ```
 
 
-5. **Configure `kubectl` on the Master Node**
+5. **Configure `kubectl` on the Worker Node**
 
    - Set up `kubectl` on the master node to interact with the Kubernetes cluster.
    ```
